@@ -1,0 +1,7 @@
+image: /home/yaroslav/ardrone_simulator/src/drone_simulator/cvg_sim_gazebo/maps/test.pgm
+resolution: 0.010000
+origin: [-20.000000, -20.000000, 0.000000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+

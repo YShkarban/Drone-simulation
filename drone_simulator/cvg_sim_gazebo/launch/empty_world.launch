@@ -1,0 +1,14 @@
+<launch>
+  <param name="/use_sim_time" value="true" />
+  <node name="empty_world_server" pkg="gazebo" type="gazebo" args="$(find cvg_sim_gazebo)/worlds/empty.world" respawn="false" output="screen">
+
+
+ <!-- Spawn simulated quadrotor uav -->
+  <include file="$(find cvg_sim_gazebo)/launch/spawn_quadrotor.launch" >
+    <arg name="model" value="$(find cvg_sim_gazebo)/urdf/quadrotor_sensors.urdf.xacro"/> 
+  </include>
+
+  </node>
+  <node name="gazebo_gui" pkg="gazebo" type="gzclient" respawn="false" output="screen"/>
+</launch>
+
