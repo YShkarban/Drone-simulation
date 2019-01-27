@@ -415,7 +415,7 @@ void GazeboQuadrotorStateController::Update()
 
 
   navdata.header.stamp = ros::Time::now();
-  navdata.header.frame_id = "ardrone_base_link";
+  navdata.header.frame_id = "base_link";
   navdata.state = robot_current_state;
   navdata.magX = 0;
   navdata.magY = 0;
@@ -453,7 +453,7 @@ void GazeboQuadrotorStateController::Update()
   ardrone_autonomy::navdata_raw_measures navdataraw;
 
   navdataraw.header.stamp = ros::Time::now();
-  navdataraw.header.frame_id = "ardrone_base_link";
+  navdataraw.header.frame_id = "base_link";
   navdataraw.drone_time = 0;
   navdataraw.tag = 0;
   navdataraw.size = 0;
