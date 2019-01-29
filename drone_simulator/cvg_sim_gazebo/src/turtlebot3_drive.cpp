@@ -13,36 +13,37 @@ DroneDrive::DroneDrive()
 DroneDrive::~DroneDrive()
 {
   updatecommandVelocity(0.0, 0.0);
+  takeoffCommand();
   ros::shutdown();
 }
 
-/*******************************************************************************
-* Init function
-*******************************************************************************/
+//Init function
 bool DroneDrive::init()
 {
   // initialize ROS parameter
   std::string cmd_vel_topic_name = nh_.param<std::string>("cmd_vel_topic_name", "");
 
-  // initialize variables
+  // variables to check range
   escape_range_       = 30.0 * DEG2RAD;
   check_forward_dist_ = 0.9;
   check_side_dist_    = 0.8;
 
+  //initialize drone pose/prev_pose
   drone_pose_ = 0.0;
   prev_drone_pose_ = 0.0;
 
   // initialize publishers
   cmd_vel_pub_   = nh_.advertise<geometry_msgs::Twist>(cmd_vel_topic_name, 10);
-  //takeoff_pub_ = nh_.advertise<std_msgs::Empty>("ardrone/takeoff","");
+  takeoff_pub_ = nh_.advertise<std_msgs::Empty>("ardrone/takeoff",1);
+
   // initialize subscribers
   laser_scan_sub_  = nh_.subscribe("scan", 10, &DroneDrive::laserScanMsgCallBack, this);
-  odom_sub_ = nh_.subscribe("ground_truth/state", 10, &DroneDrive::odomMsgCallBack, this);
+  state_sub_ = nh_.subscribe("ground_truth/state", 10, &DroneDrive::stateMsgCallBack, this);
 
   return true;
 }
 
-void DroneDrive::odomMsgCallBack(const nav_msgs::Odometry::ConstPtr &msg)
+void DroneDrive::stateMsgCallBack(const nav_msgs::Odometry::ConstPtr &msg)
 {
   double siny = 2.0 * (msg->pose.pose.orientation.w * msg->pose.pose.orientation.z + msg->pose.pose.orientation.x * msg->pose.pose.orientation.y);
 	double cosy = 1.0 - 2.0 * (msg->pose.pose.orientation.y * msg->pose.pose.orientation.y + msg->pose.pose.orientation.z * msg->pose.pose.orientation.z);  
@@ -79,6 +80,15 @@ void DroneDrive::updatecommandVelocity(double linear, double angular)
   cmd_vel_pub_.publish(cmd_vel);
 }
 
+//Function to takeoff drone
+void DroneDrive::takeoffCommand()
+{
+  std_msgs::Empty msg;
+
+  //msg = "{}"
+  takeoff_pub_.publish(msg);
+}
+
 /*******************************************************************************
 * Control Loop function
 *******************************************************************************/
@@ -92,7 +102,7 @@ bool DroneDrive::controlLoop()
   switch(state_num)
   {
     
-    case 0:
+    case 0://Direction
       ROS_INFO("state d");
       updatecommandVelocity(0.0, 0.0);
       if (scan_data_[CENTER] > check_forward_dist_)
@@ -122,13 +132,13 @@ bool DroneDrive::controlLoop()
       }
       break;
 
-    case 1:
+    case 1://Forward
       ROS_INFO("state f");
       updatecommandVelocity(1.0, 0.0);
       state_num = 0;
       break;
 
-    case 2:
+    case 2://Right
       ROS_INFO("state r");
       ROS_INFO("state r1 %f", prev_drone_pose_);
       ROS_INFO("state r2 %f", drone_pose_);
@@ -142,7 +152,7 @@ bool DroneDrive::controlLoop()
       }
       break;
 
-    case 3:
+    case 3://Left
       ROS_INFO("state l");
       ROS_INFO("state l1 %f", prev_drone_pose_);
       ROS_INFO("state l2 %f", drone_pose_);
@@ -156,7 +166,7 @@ bool DroneDrive::controlLoop()
       }
       break;
 
-    case 4:
+    case 4://Turn 90
       ROS_INFO("state turn");
       updatecommandVelocity(0.0, ANGULAR_VELOCITY*3);
       state_num = 0;
@@ -170,24 +180,25 @@ bool DroneDrive::controlLoop()
   return true;
 }
 
-/*******************************************************************************
-* Main function
-*******************************************************************************/
+//Main 
 int main(int argc, char* argv[])
 {
-  ros::init(argc, argv, "turtlebot3_drive");
-  DroneDrive turtlebot3_drive;
+  ros::init(argc, argv, "drone_drive");
+  DroneDrive drone_drive;
 
   ros::Rate loop_rate(125);
-  //ros::Rate r(10);
+  ros::Rate r(10);
 
   while (ros::ok())
   {
     //takeoff_pub_.publish(emp);
-    //ROS_INFO("Taking off...");
-    //r.sleep();
-    //ROS_INFO("We fly");
-    turtlebot3_drive.controlLoop();
+    
+    drone_drive.takeoffCommand();
+    ROS_INFO("Taking off...");
+    r.sleep();
+    ROS_INFO("We fly");
+
+    drone_drive.controlLoop();
     ros::spinOnce();
     loop_rate.sleep();
   }
