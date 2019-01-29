@@ -187,7 +187,7 @@ int main(int argc, char* argv[])
   DroneDrive drone_drive;
 
   ros::Rate loop_rate(125);
-  ros::Rate r(10);
+  ros::Rate r(300);
 
   while (ros::ok())
   {
