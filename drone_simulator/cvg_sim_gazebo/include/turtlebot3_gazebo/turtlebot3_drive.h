@@ -37,13 +37,13 @@ class DroneDrive
   ros::NodeHandle nh_;
   ros::NodeHandle nh_priv_;
 
+
   // ROS Topic Publishers
   ros::Publisher cmd_vel_pub_;
 
   // ROS Topic Subscribers
   ros::Subscriber laser_scan_sub_;
   ros::Subscriber odom_sub_;
-
 
   // Variables
   double escape_range_;

@@ -34,6 +34,7 @@ bool DroneDrive::init()
 
   // initialize publishers
   cmd_vel_pub_   = nh_.advertise<geometry_msgs::Twist>(cmd_vel_topic_name, 10);
+  //takeoff_pub_ = nh_.advertise<std_msgs::Empty>("ardrone/takeoff","");
   // initialize subscribers
   laser_scan_sub_  = nh_.subscribe("scan", 10, &DroneDrive::laserScanMsgCallBack, this);
   odom_sub_ = nh_.subscribe("ground_truth/state", 10, &DroneDrive::odomMsgCallBack, this);
@@ -178,9 +179,14 @@ int main(int argc, char* argv[])
   DroneDrive turtlebot3_drive;
 
   ros::Rate loop_rate(125);
+  //ros::Rate r(10);
 
   while (ros::ok())
   {
+    //takeoff_pub_.publish(emp);
+    //ROS_INFO("Taking off...");
+    //r.sleep();
+    //ROS_INFO("We fly");
     turtlebot3_drive.controlLoop();
     ros::spinOnce();
     loop_rate.sleep();
