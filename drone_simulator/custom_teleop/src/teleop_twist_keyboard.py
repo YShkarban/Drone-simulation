@@ -24,6 +24,9 @@ For Holonomic mode (strafing), hold down the shift key:
 t : up (+z)
 b : down (-z)
 
+1 : takeoff the ground
+2 : land on the ground
+
 anything else : stop
 
 q/z : increase/decrease max speeds by 10%
@@ -79,10 +82,10 @@ def vels(speed,turn):
 if __name__=="__main__":
     	settings = termios.tcgetattr(sys.stdin)
 	
-	pub = rospy.Publisher('cmd_vel', Twist, queue_size = 1)
+	pub = rospy.Publisher('/cmd_vel', Twist, queue_size = 1)
 	rospy.init_node('teleop_twist_keyboard')
-	pub2 = rospy.Publisher('ardrone/takeoff', Empty, queue_size = 1)
-	pub3 = rospy.Publisher('ardrone/land', Empty, queue_size = 1)
+	pub2 = rospy.Publisher('/ardrone/takeoff', Empty, queue_size = 1)
+	pub3 = rospy.Publisher('/ardrone/land', Empty, queue_size = 1)
 	empty_msg = Empty()
 
 	x = 0

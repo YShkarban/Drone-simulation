@@ -22,7 +22,7 @@ cvg_sim_msgs
 
 
 gazebo_models
-	package contains files(meshes, config, sdf) for my models, what I use in wold files.
+	package contains files(meshes, config, sdf) for my models, what I use in world files.
 
 
 
