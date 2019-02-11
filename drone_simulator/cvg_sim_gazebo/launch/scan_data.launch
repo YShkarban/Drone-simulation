@@ -1,0 +1,5 @@
+<launch>
+	<node pkg="drone_demo" type="get_scanData.py" name="scan_values" output="screen">
+
+	</node>
+</launch>

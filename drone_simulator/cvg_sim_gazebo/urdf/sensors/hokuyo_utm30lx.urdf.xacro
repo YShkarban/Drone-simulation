@@ -66,7 +66,7 @@ xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
           <always_on>true</always_on>
           <update_rate>${update_rate}</update_rate>
           <pose>0 0 0 0 0 0</pose>
-          <visualize>false</visualize>
+          <visualize>true</visualize>
           <ray>
             <scan>
               <horizontal>
