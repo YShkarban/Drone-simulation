@@ -110,9 +110,9 @@ include_directories(
 )
 
 
-add_executable(turtlebot3_drive src/turtlebot3_drive.cpp)
-add_dependencies(turtlebot3_drive ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(turtlebot3_drive ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
+add_executable(drone_drive src/drone_drive.cpp)
+add_dependencies(drone_drive ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(drone_drive ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
 
 
 ## Declare a cpp library
@@ -135,7 +135,7 @@ target_link_libraries(turtlebot3_drive ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
 #############
 ## Install ##
 #############
-install(TARGETS turtlebot3_drive
+install(TARGETS drone_drive
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

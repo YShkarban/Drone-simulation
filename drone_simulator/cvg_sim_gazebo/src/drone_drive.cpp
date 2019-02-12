@@ -46,16 +46,18 @@ bool DroneDrive::init()
 void DroneDrive::stateMsgCallBack(const nav_msgs::Odometry::ConstPtr &msg)
 {
   double siny = 2.0 * (msg->pose.pose.orientation.w * msg->pose.pose.orientation.z + msg->pose.pose.orientation.x * msg->pose.pose.orientation.y);
-	double cosy = 1.0 - 2.0 * (msg->pose.pose.orientation.y * msg->pose.pose.orientation.y + msg->pose.pose.orientation.z * msg->pose.pose.orientation.z);  
+  double cosy = 1.0 - 2.0 * (msg->pose.pose.orientation.y * msg->pose.pose.orientation.y + msg->pose.pose.orientation.z * msg->pose.pose.orientation.z);  
   
   ROS_INFO("od %f",siny);
   ROS_INFO("od %f",cosy);
-	drone_pose_ = atan2(siny, cosy);
+  drone_pose_ = atan2(siny, cosy);
 }
 
+//Function for get data from laser in 3 angles
 void DroneDrive::laserScanMsgCallBack(const sensor_msgs::LaserScan::ConstPtr &msg)
 {
-  uint16_t scan_angle[3] = {0, 30, 330};
+  //set laser angle for get data
+  uint16_t scan_angle[3] = {540, 680, 400};
 
   for (int num = 0; num < 3; num++)
   {
@@ -70,6 +72,7 @@ void DroneDrive::laserScanMsgCallBack(const sensor_msgs::LaserScan::ConstPtr &ms
   }
 }
 
+//Function for send command velocity, change location 
 void DroneDrive::updatecommandVelocity(double linear, double angular)
 {
   geometry_msgs::Twist cmd_vel;
