@@ -194,7 +194,6 @@ int main(int argc, char* argv[])
 
   while (ros::ok())
   {
-    takeoff_pub_.publish(emp);
     
     drone_drive.takeoffCommand();
     ROS_INFO("Taking off...");
