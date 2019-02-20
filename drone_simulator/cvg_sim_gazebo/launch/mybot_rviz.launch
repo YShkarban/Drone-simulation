@@ -13,6 +13,6 @@
 
   <!-- Show in Rviz   -->
   <!--node name="rviz" pkg="rviz" type="rviz"/-->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find cvg_sim_gazebo)/rviz/ExampleLaserConf.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find cvg_sim_gazebo)/rviz/Hexa_CameraAddConf.rviz"/>
 
 </launch>

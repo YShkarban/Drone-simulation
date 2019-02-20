@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import roslib; roslib.load_manifest('teleop_twist_keyboard')
+import roslib; roslib.load_manifest('drone_teleop_keyboard')
 import rospy
 
 from geometry_msgs.msg import Twist
@@ -83,7 +83,7 @@ if __name__=="__main__":
     	settings = termios.tcgetattr(sys.stdin)
 	
 	pub = rospy.Publisher('/cmd_vel', Twist, queue_size = 1)
-	rospy.init_node('teleop_twist_keyboard')
+	rospy.init_node('drone_teleop_keyboard')
 	pub2 = rospy.Publisher('/ardrone/takeoff', Empty, queue_size = 1)
 	pub3 = rospy.Publisher('/ardrone/land', Empty, queue_size = 1)
 	empty_msg = Empty()
