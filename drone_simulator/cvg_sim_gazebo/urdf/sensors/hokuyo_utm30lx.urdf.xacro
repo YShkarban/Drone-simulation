@@ -34,33 +34,6 @@ xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
 	</collision>
 </link>
       
-   
-  <!--gazebo reference="${name}_frame">
-    <sensor:ray name="${name}">
-    <rayCount>${ray_count}</rayCount>
-    <rangeCount>${ray_count}</rangeCount>
-        <laserCount>1</laserCount>
-
-        <origin>0.0 0.0 0.0</origin>
-        <displayRays>false</displayRays>
-
-        <minAngle>${min_angle}</minAngle>
-        <maxAngle>${max_angle}</maxAngle>
-
-        <minRange>0.08</minRange>
-        <maxRange>30.0</maxRange>
-        <resRange>0.01</resRange>
-        <updateRate>${update_rate}</updateRate>
-        <controller:gazebo_ros_laser name="gazebo_ros_${name}_controller" plugin="libgazebo_ros_laser.so">
-          <gaussianNoise>0.005</gaussianNoise>
-          <alwaysOn>true</alwaysOn>
-          <updateRate>${update_rate}</updateRate>
-          <topicName>${ros_topic}</topicName>
-          <frameName>${name}_frame</frameName>
-          <interface:laser name="gazebo_ros_${name}_iface" />
-        </controller:gazebo_ros_laser>
-      </sensor:ray>
-    </gazebo-->
       <gazebo reference="${name}_frame">
         <sensor type="ray" name="${name}">
           <always_on>true</always_on>

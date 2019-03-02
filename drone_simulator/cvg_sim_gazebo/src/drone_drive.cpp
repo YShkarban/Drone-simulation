@@ -33,7 +33,7 @@ bool DroneDrive::init()
   prev_drone_pose_ = 0.0;
 
   // initialize publishers
-  cmd_vel_pub_   = nh_.advertise<geometry_msgs::Twist>(cmd_vel_topic_name, 10);
+  cmd_vel_pub_ = nh_.advertise<geometry_msgs::Twist>(cmd_vel_topic_name, 10);
   takeoff_pub_ = nh_.advertise<std_msgs::Empty>("ardrone/takeoff",1);
 
   // initialize subscribers
@@ -88,7 +88,6 @@ void DroneDrive::takeoffCommand()
 {
   std_msgs::Empty msg;
 
-  //msg = "{}"
   takeoff_pub_.publish(msg);
 }
 
