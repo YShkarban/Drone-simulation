@@ -34,7 +34,7 @@
 
     <!-- Load world -->
     <include>
-      <uri>model://hexagon</uri>
+      <uri>model://MBZIRC_tower</uri>
     </include>
 
     <scene>
