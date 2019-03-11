@@ -1,20 +1,19 @@
 <?xml version="1.0" ?>
 <sdf version="1.5">
-  <model name="MBZIRC">
-    <static>true</static>
+  <model name="MBZIRC_greenCube">
     <link name="link">
-      <pose>0 0 0.115 0 0 0</pose>
+      <pose>0 0 0.5 0 0 0</pose>
       <collision name="collision">
         <geometry>
           <mesh>
-            <uri>model://MBZIRC/meshes/MBZIRC_greenCube.dae</uri>
+            <uri>model://MBZIRC_greenCube/meshes/MBZIRC_greenCube.stl</uri>
           </mesh>
         </geometry>
       </collision>
       <visual name="visual">
         <geometry>
           <mesh>
-            <uri>model://MBZIRC/meshes/MBZIRC_greenCube.dae</uri>
+            <uri>model://MBZIRC_greenCube/meshes/MBZIRC_greenCube.dae</uri>
           </mesh>
         </geometry>
       </visual>

@@ -1,20 +1,20 @@
 <?xml version="1.0" ?>
 <sdf version="1.5">
-  <model name="MBZIRC">
+  <model name="MBZIRC_challenge3">
     <static>true</static>
     <link name="link">
       <pose>0 0 0.115 0 0 0</pose>
       <collision name="collision">
         <geometry>
           <mesh>
-            <uri>model://MBZIRC/meshes/MBZIRC_tower.dae</uri>
+            <uri>model://MBZIRC_tower/meshes/MBZIRC_tower.dae</uri>
           </mesh>
         </geometry>
       </collision>
       <visual name="visual">
         <geometry>
           <mesh>
-            <uri>model://MBZIRC/meshes/MBZIRC_tower.dae</uri>
+            <uri>model://MBZIRC_tower/meshes/MBZIRC_tower.dae</uri>
           </mesh>
         </geometry>
       </visual>
